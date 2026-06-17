@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hub Engine V4.1 — AffiliateMediaHub Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06070d;--bg2:#0d1017;--bg3:#111520;--bg4:#161c28;
+  --gold:#f0a500;--teal:#00d4aa;--blue:#4f8ef7;--green:#34d399;
+  --red:#f87171;--purple:#a78bfa;--orange:#fb923c;--pink:#f472b6;
+  --txt:#e8eaf0;--muted:#6b7280;--border:#1e2433;
+}
+html,body{height:100%;width:100%;background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,a.btn,.btn{min-height:52px;padding:14px 24px;font-size:15px;border-radius:12px;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.15s;font-weight:600}
+input,textarea{font-family:'DM Sans',sans-serif;min-height:52px;font-size:16px;padding:14px 16px;border-radius:12px;outline:none;background:var(--bg3);border:1px solid var(--border);color:var(--txt);width:100%}
+input:focus,textarea:focus{border-color:var(--gold)!important}
+.btn-gold{background:var(--gold);color:#000;font-weight:700}.btn-gold:hover{opacity:.85;transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#000;font-weight:700}.btn-teal:hover{opacity:.85;transform:translateY(-2px)}
+.btn-blue{background:var(--blue);color:#fff;font-weight:700}.btn-blue:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--txt);border:2px solid var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.w100{width:100%}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:0.7}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+header{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:20px 0;position:sticky;top:0;z-index:100;animation:slideDown .5s ease}
+header .container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:8px}
+header nav{display:flex;gap:24px;align-items:center}
+header nav a{font-size:14px;color:var(--muted);transition:.15s}
+header nav a:hover{color:var(--gold)}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{padding:80px 20px;text-align:center;animation:fadeUp .6s ease .2s backwards}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:54px;font-weight:900;margin-bottom:16px;background:linear-gradient(135deg,#f0a500,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{font-size:18px;color:var(--muted);margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.8}
+.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.cta-badge{display:inline-block;background:rgba(240,165,0,.15);color:var(--gold);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:16px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;padding:60px 20px;animation:fadeUp .6s ease .4s backwards}
+.feature-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;transition:.2s}
+.feature-card:hover{transform:translateY(-8px);border-color:var(--gold)}
+.feature-icon{font-size:48px;margin-bottom:16px}
+.feature-title{font-size:18px;font-weight:700;margin-bottom:12px}
+.feature-desc{font-size:14px;color:var(--muted);line-height:1.8}
+.showcase{padding:60px 20px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.showcase .container{animation:fadeUp .6s ease .4s backwards}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:900;margin-bottom:12px}
+.section-sub{font-size:16px;color:var(--muted);margin-bottom:40px;max-width:600px}
+.showcase-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:40px}
+.showcase-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:24px;transition:.2s}
+.showcase-card:hover{border-color:var(--teal)}
+.showcase-card-title{font-size:16px;font-weight:700;margin-bottom:10px}
+.showcase-card-desc{font-size:13px;color:var(--muted);line-height:1.8}
+.courses{padding:60px 20px;animation:fadeUp .6s ease .5s backwards}
+.courses .container{max-width:900px}
+.course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.course-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:2px solid var(--border);border-radius:16px;padding:28px;text-align:center;transition:.2s}
+.course-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.course-emoji{font-size:44px;margin-bottom:12px}
+.course-name{font-size:16px;font-weight:700;margin-bottom:8px}
+.course-length{font-size:12px;color:var(--muted);margin-bottom:12px}
+.course-topics{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:16px}
+.gumroad-section{padding:60px 20px;background:linear-gradient(135deg,rgba(240,165,0,.1),rgba(0,212,170,.1));border:2px solid var(--border);border-radius:20px;margin:60px 20px;text-align:center;animation:fadeUp .6s ease .6s backwards}
+.gumroad-title{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:900;margin-bottom:16px}
+.gumroad-sub{font-size:16px;color:var(--muted);margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.8}
+.pdf-showcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:40px 0}
+.pdf-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;font-size:12px;color:var(--muted);opacity:.7}
+.pdf-item-icon{font-size:32px;margin-bottom:8px}
+footer{padding:40px 20px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+.ai-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:30px 0}
+.ai-badge{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:8px 14px;font-size:12px;font-weight:600}
+@media(max-width:768px){
+  .hero h1{font-size:36px}
+  .section-title{font-size:24px}
+  header nav{display:none}
+  .hero-buttons{flex-direction:column}
+  .features-grid,.course-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">⚡ HUB ENGINE V4.1</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#courses">Courses</a>
+      <a href="#pdfs">Digital Products</a>
+      <a href="#studio">Studio</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero container">
+  <div class="cta-badge">Your All-in-One AI Studio Platform</div>
+  <h1>Hub Engine V4.1</h1>
+  <p class="sub">Create videos, learn AI, find jobs, and sell digital products — all from one dashboard. Video Studio + Scene Generator + 10 AI Assistants + 4 Courses + PDF Store. Zero recurring costs.</p>
+  <div class="hero-buttons">
+    <a href="#pdfs" class="btn btn-gold" style="font-size:16px;min-height:56px">📄 View PDF Store on Gumroad →</a>
+    <a href="#studio" class="btn btn-ghost" style="font-size:16px;min-height:56px">🎬 See All Features →</a>
+  </div>
+  <div style="font-size:13px;color:var(--muted);margin-top:24px">Built by John Lanter · AffiliateMediaHub Studio · 2026</div>
+</div>
+
+<div class="features-grid container">
+  <div class="feature-card">
+    <div class="feature-icon">🎬</div>
+    <div class="feature-title">Video Studio</div>
+    <div class="feature-desc">Create podcast videos, affiliate content, and business videos. Monday through Friday with your custom cast of 6 actors.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🎨</div>
+    <div class="feature-title">Scene Generator</div>
+    <div class="feature-desc">Kling AI + Hailuo — generate free video scenes in minutes. No credit card, no limits. Then edit in CapCut or Wan2.2.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🤖</div>
+    <div class="feature-title">10 AI Assistants</div>
+    <div class="feature-desc">Groq, Claude, Gemini, DeepSeek, Perplexity, ElevenLabs, NotebookLM, Suno, DALL-E, ChatGPT. All working together.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">✍️</div>
+    <div class="feature-title">Becky AI</div>
+    <div class="feature-desc">Your studio brain. Ask her to write scripts, generate scene prompts, write blogs, cover letters, and more.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📚</div>
+    <div class="feature-title">4 Courses</div>
+    <div class="feature-desc">Microsoft Excel, AI Tools & Agents, Spanish with Becky, CEO Leadership. Built-in skill tracks inside Hub Engine v4.1 Ultra.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">💰</div>
+    <div class="feature-title">PDF Store + Gumroad</div>
+    <div class="feature-desc">10 ready-to-write digital product templates. Write, protect, and sell on Gumroad. Direct dashboard integration.</div>
+  </div>
+</div>
+
+<div class="showcase" id="studio">
+  <div class="container">
+    <div class="section-title">What's Inside</div>
+    <div class="section-sub">Hub Engine V4.1 gives you everything to build an AI-powered content business.</div>
+    <div class="showcase-cards">
+      <div class="showcase-card">
+        <div class="feature-icon">🎙️</div>
+        <div class="showcase-card-title">Podcast + Video Production</div>
+        <div class="showcase-card-desc">3 weekly podcast shows. Becky writes scripts. Scene Generator creates footage. You edit and publish.</div>
+      </div>
+      <div class="showcase-card">
+        <div class="feature-icon">🔍</div>
+        <div class="showcase-card-title">AI Job Finder</div>
+        <div class="showcase-card-desc">Active Lead Scanner. Staging area to pull office and systems leads. Comprehensive ATS alignment framework.</div>
+      </div>
+      <div class="showcase-card">
+        <div class="feature-icon">📰</div>
+        <div class="showcase-card-title">Daily Blog Generator</div>
+        <div class="showcase-card-desc">Type 1-2 words. Becky builds full LinkedIn story. Copy + publish in 2 minutes.</div>
+      </div>
+      <div class="showcase-card">
+        <div class="feature-icon">🎭</div>
+        <div class="showcase-card-title">Custom Cast</div>
+        <div class="showcase-card-desc">6 professional actors. Lisa, Susan, Paul, Alisha, Becky Host, Becky Guest. All with AI voices.</div>
+      </div>
+      <div class="showcase-card">
+        <div class="feature-icon">📅</div>
+        <div class="showcase-card-title">Show Schedule</div>
+        <div class="showcase-card-desc">Built-in calendar. Plan your week. Track all 3 podcast shows + video uploads.</div>
+      </div>
+      <div class="showcase-card">
+        <div class="feature-icon">⚙️</div>
+        <div class="showcase-card-title">Settings & Control</div>
+        <div class="showcase-card-desc">Password protected. All your data stays in your browser. Private. Secure. Yours.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="courses" id="courses">
+  <div class="container">
+    <div class="section-title">4 Courses Included</div>
+    <div class="section-sub">28-day re-learning programs hosted inside the <strong>Hub Engine v4.1 Ultra</strong> academy workspace.</div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-emoji">📊</div>
+        <div class="course-name">Microsoft Excel Proficiency</div>
+        <div class="course-length">28 days</div>
+        <div class="course-topics">Core logic training. Modern data logging. Spreadsheet structures and entry validation protocols.</div>
+      </div>
+      <div class="course-card">
+        <div class="course-emoji">🤖</div>
+        <div class="course-name">AI Tools & Assistant Agents</div>
+        <div class="course-length">28 days</div>
+        <div class="course-topics">Hands-on systems training. Mapping foundational prompt schemas and structuring custom agent assistants.</div>
+      </div>
+      <div class="course-card">
+        <div class="course-emoji">🇪🇸</div>
+        <div class="course-name">Spanish with Becky</div>
+        <div class="course-length">28 days</div>
+        <div class="course-topics">Daily structural lessons. Interactive conversation practice modules with an integrated audio tutor.</div>
+      </div>
+      <div class="course-card">
+        <div class="course-emoji">👔</div>
+        <div class="course-name">CEO Leadership</div>
+        <div class="course-length">28 days</div>
+        <div class="course-topics">Standard Operating Procedures (SOP) development. Document control infrastructure and system bottleneck resolution.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pdfs">
+  <div class="gumroad-section container">
+    <div class="gumroad-title">📄 Digital Product Store</div>
+    <div class="gumroad-sub">10 ready-to-write PDF blueprints. Write, protect, and sell on Gumroad. This is your revenue stream.</div>
+    <div class="pdf-showcase">
+      <div class="pdf-item">
+        <div class="pdf-item-icon">📊</div>
+        <div>AI Tools Guide</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">🎥</div>
+        <div>Video Creation Playbook</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">💼</div>
+        <div>Remote Job Bible</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">🚀</div>
+        <div>Startup Checklist</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">🧠</div>
+        <div>Prompt Engineering Guide</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">💰</div>
+        <div>Affiliate Marketing 101</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">📱</div>
+        <div>Social Media Strategy</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">🎯</div>
+        <div>Goal Setting Framework</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">🌐</div>
+        <div>Personal Brand Guide</div>
+      </div>
+      <div class="pdf-item">
+        <div class="pdf-item-icon">✍️</div>
+        <div>Writing for Profit</div>
+      </div>
+    </div>
+    <a href="https://gumroad.com" target="_blank" class="btn btn-gold" style="font-size:16px;min-height:56px">🛍️ Shop PDF Store on Gumroad →</a>
+    <div style="font-size:12px;color:var(--muted);margin-top:20px">Each blueprint takes 2-4 hours to write using Becky AI. Sell for $7-47. Your margin = 100% (after Gumroad fees).</div>
+  </div>
+</div>
+
+<div style="padding:60px 20px;text-align:center;animation:fadeUp .6s ease .8s backwards">
+  <div class="container" style="max-width:700px">
+    <div class="section-title">How It Works</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px;margin:30px 0">
+      <div style="margin-bottom:24px">
+        <div style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Step 1</div>
+        <div style="font-size:16px;font-weight:700">Enter Your Password</div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:16px 0"></div>
+      <div style="margin-bottom:24px;margin-top:24px">
+        <div style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Step 2</div>
+        <div style="font-size:16px;font-weight:700">Use Daily Workflows</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:6px">Video Studio, Becky AI, Scene Generator, Job Finder, Blog Writer.</div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:16px 0"></div>
+      <div style="margin-bottom:0;margin-top:24px">
+        <div style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Step 3</div>
+        <div style="font-size:16px;font-weight:700">Sell on Gumroad</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:6px">Build PDFs in Hub Engine Pro. Publish to Gumroad. Earn 100% (minus Gumroad fees).</div>
+      </div>
+    </div>
+    <div style="background:rgba(0,212,170,.08);border:2px solid var(--teal);border-radius:14px;padding:24px;margin:30px 0">
+      <div style="font-size:18px;font-weight:700;margin-bottom:12px">🔐 Private Studio Network</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.8">Your Hub Engine applications are password-protected. Only you can access. All data stays in your browser. No cloud dependency. No recurring costs.</div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:60px 20px;background:var(--bg2);border-top:1px solid var(--border);text-align:center;animation:fadeUp .6s ease .9s backwards">
+  <div class="container" style="max-width:900px">
+    <div class="section-title">10 AI Assistants</div>
+    <div class="section-sub">Your team of minds, working together.</div>
+    <div class="ai-list">
+      <div class="ai-badge">🤖 Groq — Fast Planning</div>
+      <div class="ai-badge">🧠 Claude — Deep Thinking</div>
+      <div class="ai-badge">🔍 Gemini — Research</div>
+      <div class="ai-badge">💻 DeepSeek — Code Debug</div>
+      <div class="ai-badge">✍️ Perplexity — Research</div>
+      <div class="ai-badge">🎤 Eleven Labs — Voice</div>
+      <div class="ai-badge">📺 NotebookLM — Podcast</div>
+      <div class="ai-badge">🎵 Suno — Music</div>
+      <div class="ai-badge">🎨 DALL-E — Images</div>
+      <div class="ai-badge">🌐 ChatGPT — General</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div style="margin-bottom:16px">
+      <strong>Hub Engine V4.1</strong> — Your AI-powered studio platform<br/>
+      Built by John Lanter · AffiliateMediaHub Studio · 2026
+    </div>
+    <div style="font-size:12px;color:var(--muted)">
+      Four Minds. One Mission. Zero Cost. 🚀
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
